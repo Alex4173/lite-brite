@@ -18,6 +18,11 @@
       //grab the number of rows from the input for the new grid
       var newRowNumber = parseInt(numberOfRowsInput.val());
       //make the new grid based on the new rows and columns
+      if(isNan(newColNumber) || newColNumber < 1 || newColNumber > 30){
+        newColNumber = 15;
+        newRowNumber = 15;
+        $('#error').text('Please enter a number between 1 and 30')
+      } else { }
       makeGrid(newRowNumber, newColNumber);
       $('.cell').on('click', changeColor);
     }
