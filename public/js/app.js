@@ -2,12 +2,15 @@
 
     var canvas = $('#canvas'); //my placement area - think of paper in drawing
     var updateGridButton = $('#update-grid-button');
+    //var resetGridButton = $('#reset-grid-button');
     var numberOfColsInput = $('#number-of-cols');
     var numberOfRowsInput = $('#number-of-rows');
+    var resetButton = $('reset');
 
     makeGrid(15, 15);
     $('.cell').on('click', changeColor);
     updateGridButton.on('click', updateGridSize);
+    resetGridButton.on('click', resetGrid);
     //clearGrid();
     //makeGrid(30, 30);
 
@@ -18,15 +21,21 @@
       //grab the number of rows from the input for the new grid
       var newRowNumber = parseInt(numberOfRowsInput.val());
       //make the new grid based on the new rows and columns
-      if(isNan(newColNumber) || newColNumber < 1 || newColNumber > 30){
+      if(isNaN(newColNumber) || newColNumber < 1 || newColNumber > 31 || newRowNumber < 1 || newRowNumber > 31){
         newColNumber = 15;
         newRowNumber = 15;
-        $('#error').text('Please enter a number between 1 and 30')
-      } else { }
+        $('#error').text('Please enter a number between 1 and 30.');
+      } else {
+        $('#error').text(' ');
+      }
       makeGrid(newRowNumber, newColNumber);
       $('.cell').on('click', changeColor);
     }
 
+    function resetGrid(){
+        newColNumber = 15;
+        newRowNumber = 15;
+    }
     function clearGrid(){
       canvas.empty();
     }
